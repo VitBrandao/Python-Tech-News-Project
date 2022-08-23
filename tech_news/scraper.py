@@ -1,7 +1,8 @@
 import requests
 import time
+from parsel import Selector
 
-# trybe_url = "https://blog.betrybe.com"
+trybe_url = "https://blog.betrybe.com"
 
 
 # Requisito 1
@@ -17,18 +18,27 @@ def fetch(url):
         if(response.status_code != 200):
             return None
 
-        return response.text
+        return print(response.text)
 
     except requests.ReadTimeout:
         return None
 
 
-# fetch(trybe_url)
-
-
 # Requisito 2
 def scrape_novidades(html_content):
-    return 0
+    selector = Selector(text=html_content)
+
+    class_p1 = ".cs-overlay.cs-overlay-hover"
+    class_p2 = ".cs-bg-dark.cs-overlay-ratio.cs-ratio-landscape "
+    a_attr = "a::attr(href)"
+    class_name = class_p1 + class_p2 + a_attr
+
+    all_news_url = selector.css(class_name).getall()
+
+    if len(all_news_url) == 0:
+        return []
+
+    return all_news_url
 
 
 # Requisito 3
