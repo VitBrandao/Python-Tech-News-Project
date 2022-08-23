@@ -18,7 +18,7 @@ def fetch(url):
         if(response.status_code != 200):
             return None
 
-        return print(response.text)
+        return response.text
 
     except requests.ReadTimeout:
         return None
