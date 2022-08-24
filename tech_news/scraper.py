@@ -1,8 +1,7 @@
 import requests
 import time
 from parsel import Selector
-
-trybe_url = "https://blog.betrybe.com"
+from tech_news.database import create_news
 
 
 # Requisito 1
@@ -104,14 +103,29 @@ def scrape_noticia(html_content):
     return news_information
 
 
-# response = requests.get(
-#     'https://blog.betrybe.com/carreira/livros-sobre-lideranca/',
-#     headers={"user-agent": "Fake user-agent"},
-# )
-
-# print(scrape_noticia(response.text))
-
-
 # Requisito 5
 def get_tech_news(amount):
-    return 0
+    trybe_url = "https://blog.betrybe.com"
+
+    all_news = []
+    for _ in range(amount):
+        links = scrape_novidades(fetch(trybe_url))
+        for link in links:
+            all_news.append(link)
+
+        trybe_url = scrape_next_page_link(fetch(trybe_url))
+    all_news = all_news[:amount]
+    # print(all_news)
+
+    tech_news = []
+    for news in all_news:
+        news_object = scrape_noticia(fetch(news))
+        tech_news.append(news_object)
+    # print(tech_news)
+
+    create_news(tech_news)
+
+    return tech_news
+
+
+# get_tech_news(3)
