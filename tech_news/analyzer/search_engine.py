@@ -37,8 +37,8 @@ def search_by_tag(tag):
     news_in_db = search_news({'tags': {'$regex': tag, '$options': 'i'}})
 
     news_by_tag = list()
-    for tags in news_in_db:
-        news_by_tag.append((tags['title'], tags['url']))
+    for news in news_in_db:
+        news_by_tag.append((news['title'], news['url']))
 
     return news_by_tag
 
