@@ -54,7 +54,62 @@ def scrape_next_page_link(html_content):
 
 # Requisito 4
 def scrape_noticia(html_content):
-    return 0
+    news_information = dict()
+    selector = Selector(text=html_content)
+
+    # URL
+    page_url = selector.css("link[rel*=canonical]::attr(href)").get()
+    news_information['url'] = page_url
+
+    # Título
+    title = selector.css(".entry-title ::text").get()
+    news_information['title'] = title.strip()
+
+    # Data
+    date = selector.css(".meta-date ::text").get()
+    news_information['timestamp'] = date
+
+    # Autor(a)
+    writer = selector.css(".url.fn.n ::text").get()
+    news_information['writer'] = writer
+
+    # Comentários
+    comments = selector.css("#comments .title-block ::text").get()
+    if comments is None:
+        comments = 0
+    else:
+        comments = comments[4:5]
+    news_information['comments_count'] = comments
+
+    # 1º Parágrafo
+    summary = selector.xpath("string(.//div[@class='entry-content']/p)").get()
+    if summary is None:
+        summary = []
+
+    news_information['summary'] = summary.strip()
+
+    # Tags
+    get_page_tags = selector.css(".post-tags a::text").getall()
+    if get_page_tags is not None:
+        tags = get_page_tags
+    else:
+        tags = []
+
+    news_information['tags'] = tags
+
+    # Categoria
+    category = selector.css(".category-style .label ::text").get()
+    news_information['category'] = category
+
+    return news_information
+
+
+# response = requests.get(
+#     'https://blog.betrybe.com/carreira/livros-sobre-lideranca/',
+#     headers={"user-agent": "Fake user-agent"},
+# )
+
+# print(scrape_noticia(response.text))
 
 
 # Requisito 5
