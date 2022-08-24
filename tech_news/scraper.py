@@ -115,17 +115,12 @@ def get_tech_news(amount):
 
         trybe_url = scrape_next_page_link(fetch(trybe_url))
     all_news = all_news[:amount]
-    # print(all_news)
 
     tech_news = []
     for news in all_news:
         news_object = scrape_noticia(fetch(news))
         tech_news.append(news_object)
-    # print(tech_news)
 
     create_news(tech_news)
 
     return tech_news
-
-
-# get_tech_news(3)
