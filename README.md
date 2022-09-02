@@ -1,5 +1,8 @@
 # Boas-vindas ao repositório do Tech News
 
+:warning: :brazil: | Nota: o material abaixo é propriedade exclusiva da Trybe, com uso restrito às pessoas estudantes vinculadas à instituição. | :us: Warn: the following content has all the legal rights reserved to Trybe. Its use is reserved to Trybe students. 
+## Lista de Requisitos:
+
 # Requisitos obrigatórios
 
 ## 1 - Crie a função `fetch`
