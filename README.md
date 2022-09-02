@@ -11,8 +11,8 @@ local: `tech_news/scraper.py`
 Antes de fazer scrape, precisamos de uma página! Esta função será responsável por fazer a requisição HTTP ao site e obter o conteúdo HTML.
 Alguns cuidados deverão ser tomados: como a nossa função poderá ser utilizada várias vezes em sucessão, na nossa implementação devemos nos assegurar que um [Rate Limit](https://app.betrybe.com/course/computer-science/redes-e-raspagem-de-dados/raspagem-de-dados/ab38ab4e-bdbd-4984-8987-1abf32d85f26/conteudos/4edde8f1-9d55-4c98-a593-e3043848a127/alguns-problemas/) será respeitado.
 
-- A função deve receber uma URL
-- A função deve fazer uma requisição HTTP `get` para esta URL utilizando a função `requests.get`
+- A função deve receber uma URL.
+- A função deve fazer uma requisição HTTP `get` para esta URL utilizando a função `requests.get`.
 - A função deve retornar o conteúdo HTML da resposta.
 - A função deve respeitar um Rate Limit de 1 requisição por segundo; Ou seja, caso chamada múltiplas vezes, ela deve aguardar 1 segundo entre cada requisição que fizer.
 **Dica:** Uma forma simples de garantir que cada requisição seja feita com um intervalo mínimo de um segundo é utilizar `time.sleep(1)` antes de cada requisição. (Existem outras formas mais eficientes.)
