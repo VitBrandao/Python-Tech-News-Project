@@ -1,5 +1,4 @@
 # Boas-vindas ao repositório do Tech News
----
 
 # Requisitos obrigatórios
 
